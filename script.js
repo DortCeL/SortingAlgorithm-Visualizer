@@ -6,17 +6,22 @@ const container = document.getElementById("container");
 // n ===> number of elements
 let n = 5;
 const max_height = 20;
+const height_multiplication_factor = 5;
 
 let grid = [2, 1, 4, 5, 3];
 
 // this is for initial grid visualization
 for (let i = 0; i < n; i++) {
 	let div = document.createElement("div");
-	div.classList.add("element", `x-${i}`);
-	div.textContent = grid[i];
-	div.style.height = `${grid[i] * 5}%`;
+	div.classList.add("element");
+
+	//TODO: removed element number temporarily
+	// div.textContent = grid[i];
+
+	div.style.height = `${grid[i] * height_multiplication_factor}%`;
+
 	if (n > 15) {
-		div.style.width = "30px";
+		div.style.width = "10px";
 	}
 
 	container.appendChild(div);
@@ -32,12 +37,52 @@ slider.addEventListener("input", () => {
 	// Main chart
 	for (let i = 0; i < n; i++) {
 		const div = document.createElement("div");
-		div.classList.add("element", `x-${i}`);
-		div.textContent = grid[i];
-		div.style.height = `${grid[i] * 5}%`;
+
+		// TODO: check grid[i] or i ===> resolve : eita lagbei na.... amra height swap korbo children er array dhoira.
+		div.classList.add("element");
+
+		//TODO: removed element number temporarily
+		// div.textContent = grid[i];
+
+		div.style.height = `${grid[i] * height_multiplication_factor}%`;
 
 		container.appendChild(div);
 	}
 });
 
-bubbleSortBtn.addEventListener(() => {});
+bubbleSortBtn.addEventListener("click", async () => {
+	let swapped; // track if swap applies
+
+	for (let i = 0; i < n - 1; i++) {
+		swapped = false;
+
+		for (let j = 0; j < n - i - 1; j++) {
+			const cells = container.children;
+
+			if (grid[j] > grid[j + 1]) {
+				// swap heights
+				const tempHeight = cells[j + 1].style.height;
+				cells[j + 1].style.height = cells[j].style.height;
+				cells[j].style.height = tempHeight;
+
+				// swap grid elements
+				[grid[j], grid[j + 1]] = [grid[j + 1], grid[j]];
+				swapped = true;
+
+				// pause
+				await new Promise((resolve) => {
+					setTimeout(resolve, 1);
+				});
+
+				// // visual feedback
+				// ! i tried doing this but eikhane to corresponding div er height elomelo hoya jay since grid er index swap hoitese. so eita possible nah
+				// let Acell = document.querySelector(`.x-${grid[i]}`);
+				// let Bcell = document.querySelector(`.x-${grid[j]}`);
+				// let tempHeight = parseInt(Bcell.style.height) / height_multiplication_factor;
+				// Bcell.style.height = `${parseInt(Acell.style.height)}%`;
+				// Acell.style.height = `${tempHeight * height_multiplication_factor}%`;
+			}
+		}
+		if (!swapped) break;
+	}
+});
