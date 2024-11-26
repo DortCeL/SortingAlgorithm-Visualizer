@@ -36,10 +36,10 @@ slider.addEventListener("input", () => {
 	for (let i = 0; i < n; i++) {
 		const div = document.createElement("div");
 
-		// TODO: check grid[i] or i ===> resolve : eita lagbei na.... amra height swap korbo children er array dhoira.
+		// grid[i] or i ===> resolve : eita lagbei na.... amra height swap korbo children er array dhoira.
 		div.classList.add("element");
 
-		//TODO: removed element number temporarily
+		//removed element number temporarily
 		// div.textContent = grid[i];
 
 		div.style.height = `${grid[i] * height_multiplication_factor}%`;
