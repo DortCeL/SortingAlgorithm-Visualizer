@@ -20,9 +20,7 @@ for (let i = 0; i < n; i++) {
 
 	div.style.height = `${grid[i] * height_multiplication_factor}%`;
 
-	if (n > 15) {
-		div.style.width = "10px";
-	}
+	div.style.width = "60px";
 
 	container.appendChild(div);
 }
@@ -45,6 +43,14 @@ slider.addEventListener("input", () => {
 		// div.textContent = grid[i];
 
 		div.style.height = `${grid[i] * height_multiplication_factor}%`;
+
+		if (n < 25) {
+			div.style.width = "50px";
+		} else if (n < 50) {
+			div.style.width = "30px";
+		} else if (n < 70) {
+			div.style.width = "20px";
+		}
 
 		container.appendChild(div);
 	}
