@@ -5,8 +5,8 @@ const container = document.getElementById("container");
 
 // n ===> number of elements
 let n = 5;
-const max_height = 20;
-const height_multiplication_factor = 5;
+const max_height = 50;
+const height_multiplication_factor = 2;
 
 let grid = [2, 1, 4, 5, 3];
 
